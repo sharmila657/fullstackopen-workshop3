@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 
-const App = (props) => {
+const App = () => {
   const [notes, setNotes] = useState([]);
 
   const [newNote, setNewNote] = useState(
@@ -27,9 +27,6 @@ const App = (props) => {
     console.log(myAxiosPromise);
   }, []);
 
-  
-
-
   const notesToShow = showAll
     ? notes
     : notes.filter(note => note.important === true)
@@ -42,6 +39,11 @@ const App = (props) => {
       important: Math.random() < 0.5,
       id: notes.length + 1,
     }
+    axios.post("http://localhost:3001/notes", noteObject).then((response) => {
+      // console.log(response);
+      setNotes(notes.concat(response.data));
+      setNewNote("");
+    });
 
     setNotes(notes.concat(noteObject))
     setNewNote('')
