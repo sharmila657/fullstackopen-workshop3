@@ -45,6 +45,8 @@ const App = () => {
       setNewNote("");
     });
 
+
+
     setNotes(notes.concat(noteObject))
     setNewNote('')
   }
@@ -53,6 +55,28 @@ const App = () => {
   const handleNoteChange = (event) => {
     console.log(event.target.value)
     setNewNote(event.target.value)
+  }
+
+  const updateData = (id) => {
+    // 1.update the server (backend)
+    let currentNote = notes.find((note) => {
+      return note.id === id;
+  
+      })
+    
+    let updatedNote = {...currentNote, important: !currentNote.important}
+    let putPromise = axios.put(`http://localhost:3001/notes/${id}`, updatedNote)
+    
+    putPromise.then((result) => {
+      console.dir(result)
+      let updatedNote = result.data;
+      
+      // 2.update statee(frontend)
+      setNotes(
+        notes.map((note) =>(note.id === updatedNote.id ? updatedNote : note))
+      )
+})
+    
   }
 
   return (
@@ -65,13 +89,13 @@ const App = () => {
       </div>
       <ul>
       {notesToShow.map(note =>
-          <Note key={note.id} note={note} />
-        )}
+        <Note key={note.id} note={note} updateNote={() => { updateData(note.id) }}  />
+      )}
       </ul>
       <form onSubmit={addNote}>
       <input value={newNote} onChange={handleNoteChange} />
         <button type="submit">save</button>
-      </form>   
+      </form>    
     </div>
   )
 }

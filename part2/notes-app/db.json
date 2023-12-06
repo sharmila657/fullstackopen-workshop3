@@ -24,6 +24,11 @@
       "content": "javascript is not easy",
       "important": false,
       "id": 5
+    },
+    {
+      "content": "dec 6 new day",
+      "important": true,
+      "id": 6
     }
   ]
 }
