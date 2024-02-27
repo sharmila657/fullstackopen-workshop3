@@ -1,7 +1,7 @@
 {
   "name": "react-start",
   "version": "1.0.0",
-  "description": "",
+  "description": "- clone this repository",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.1"
   }
 }
