@@ -2,10 +2,26 @@ import {
   BrowserRouter,
   Routes, Route, Link
 } from 'react-router-dom'
+import Notes from './Notes'
+import Note from './Note'
 
-const Notes =()=>{
- return 1
-}
+const notes = [
+  {
+    "id": 1,
+    "content": "HTML is easy",
+    "important": false
+  },
+  {
+    "id": 2,
+    "content": "Browser can execute only JavaScript",
+    "important": true
+  },
+  {
+    "id": 3,
+    "content": "GET and POST are the most important methods of HTTP protocol",
+    "important": true
+  }
+]
 
 const Users =()=>{
   return 2
@@ -24,15 +40,16 @@ const App = () => {
   return (
     <BrowserRouter>
       <div>
-        <Link style={padding} to="/home">home</Link>
+        <Link style={padding} to="/">home</Link>
         <Link style={padding} to="/notes">notes</Link>
         <Link style={padding} to="/users">users</Link>
       </div>
 
       <Routes>
-        <Route path="/notes" element={<Notes />} />
+      <Route path="/notes/:id" element={<Note notes={notes} />} />
+      <Route path="/notes" element={<Notes notes={notes} />} />
         <Route path="/users" element={<Users />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
       </Routes>
 
       <div>
